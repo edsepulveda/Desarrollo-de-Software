@@ -30,5 +30,5 @@
 	las fotos estan en la carpeta media.
 
 
-6) para comprar registrarse y desde ttp://localhost:8000/admin/  
+6) para comprar registrarse y desde http://localhost:8000/admin/  
 	asignar usuario creado en la primera seccion de usuarios.
