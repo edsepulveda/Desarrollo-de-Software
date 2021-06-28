@@ -18,6 +18,11 @@
             .then(function(result) {
                 if(result.isConfirmed){
                     window.location.href = "/eliminar-producto/"+id+"/"
+                    Swal.fire(
+                    'Eliminado:',
+                    'El producto ha sido eliminado con exito.',
+                    'success'
+                )
                 }
                 
             })

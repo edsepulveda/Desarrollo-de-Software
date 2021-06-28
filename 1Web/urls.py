@@ -39,12 +39,12 @@ urlpatterns = [
 
 
     #vista-admin
-    path('dashboard/informe/', informe, name="informes"),
-    path('dashboard/desempeño/', desempeno, name="tienda"),
-    path('dashboard/listar-producto/', listar_producto, name="listar_producto"),
-    path('dashboard/modificar-producto/<id>/',modificar_producto, name="modificar_producto"),
-    path('dashboard/agregar-producto/',agregar_producto, name="agregar_producto"),
-    path('dashboard/eliminar-producto/<id>/', eliminar_producto, name="eliminar_producto"),
+    path('informe/', informe, name="informes"),
+    path('desempeño/', desempeno, name="tienda"),
+    path('listar-producto/', listar_producto, name="listar_producto"),
+    path('modificar-producto/<id>/',modificar_producto, name="modificar_producto"),
+    path('agregar-producto/',agregar_producto, name="agregar_producto"),
+    path('eliminar-producto/<id>/', eliminar_producto, name="eliminar_producto"),
     #End of Admin    
 
 
