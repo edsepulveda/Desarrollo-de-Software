@@ -1,0 +1,101 @@
+{% load static %}
+{% include "admin/dashboard.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Desempeño de la Tienda</title>
+</head>
+<body>
+    <div class="content-wrapper">
+        <a class="nav-link" href="{% url 'informes' %}"><button class="btn btn-info btn-md">Ventas Mensuales</button></a>
+        <figure class="highcharts-figure">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="container"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="highcharts-description">
+                Basic line chart showing trends in a dataset. This chart includes the
+                <code>series-label</code> module, which adds a label to each line for
+                enhanced readability.
+            </p>
+        </figure>
+    </div>
+</body>
+
+<script type="application/javascript">
+Highcharts.chart('container', {
+
+title: {
+    text: 'Desempeño de la tienda desde 2010 a 2021 (Sede Vitacura)'
+},
+
+
+yAxis: {
+    title: {
+        text: 'Numero de ventas'
+    }
+},
+
+xAxis: {
+    accessibility: {
+        rangeDescription: 'Range: 2010 to 2021'
+    }
+},
+
+legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle'
+},
+
+plotOptions: {
+    series: {
+        label: {
+            connectorAllowed: false
+        },
+        pointStart: 2010
+    }
+},
+
+series: [{
+
+    name: 'Ventas y distribucion',
+    data: [9675, 12344, 9432, 10234, 13453, 15643, 18954, 20324, 22123, 24321, 9543]
+},
+],
+
+responsive: {
+    rules: [{
+        condition: {
+            maxWidth: 500
+        },
+        chartOptions: {
+            legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+            }
+        }
+    }]
+}
+
+});
+</script>
+</html>
+
+{% endblock %}

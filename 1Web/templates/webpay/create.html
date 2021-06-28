@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<br>
+<br>
+<br>
+
+
+<div class="container-fluid d-flex justify-content-center align-items-end contenedor">
+
+<form method="post" action="{{ response.url }}">
+
+    {% csrf_token %}
+    <input type="hidden" name="token_ws" value="{{ response.token }}" />
+    <br><br>
+    <h2> Ya estas a un paso de terminar tu compra!</h2>
+    <br>
+    <img id="transbank" class="img-fluid" src="https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0032/5876/contratar-webpay.png?1544802448" alt="">
+    <br>
+    <br>
+    <input type="submit" value="Ir a pagar" class="btn btn-success btn-lg pagar-boton"/>
+  </form>
+</div>
+<div class="container-fluid d-flex justify-content-end">
+  <a href="{% url 'carro' %}"><button class="btn btn-info btn-lg pagar-boton">Volver</button></a>
+</div>
+<br>
+<br>
+
+
+
+  {% endblock %}

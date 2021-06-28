@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <div id="contenido">
+        {% load crispy_forms_tags %}
+        <br>
+        <div class="row">
+            <br>
+            <div class="col-12 col-md-6 offset-md-3">
+                <br><br>
+                <h2>Formulario de Contacto</h2>
+                 <!--para ingresar los datos y no se vea en url-->
+                <form method="post" class="was-validated">
+                    <!-- token de seguridad -->
+                    {% csrf_token %}               
+                    {{ form | crispy }}
+                    <br>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" id="guardar" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+                <br>
+                <h3> {{m}} </h3>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

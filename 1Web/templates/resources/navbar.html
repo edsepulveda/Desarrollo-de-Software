@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top py-3">
+            <div class="container"><a href="{% url 'home' %}" class="navbar-brand text-uppercase font-weight-bold">MUSIC PRO</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+                
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link text-uppercase font-weight-bold active active-first">Inicio <span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle text-uppercase font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catalogo
+                          </a>
+                          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'catalogoCuerdas' %}">Cuerdas</a>
+                            <a class="dropdown-item" href="{% url 'catalogoPercusion' %}">Percusion</a>
+                            <a class="dropdown-item" href="{% url 'catalagoAmplificadores' %}">Amplificadores</a>
+                            <a class="dropdown-item" href="{% url 'catalagoAccesorios' %}">Accesorios</a>
+                        </li>                           
+                        <li class="nav-item"><a href="{% url 'contacto' %}" class="nav-link text-uppercase font-weight-bold">Contacto</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-uppercase font-weight-bold" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </a>
+                            <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                              {% if user.is_authenticated %}
+                              <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+                              <br>
+                              <p class="dropdown-item">Bienvenido {{user.username}}</p>
+                              {% else %}
+                                <a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a>
+                                <a class="dropdown-item" href="{% url 'login' %}">Logearse</a>
+                              {% endif %}
+                        {% if request.user.is_staff %}
+                        <li class="nav-item">
+                          <li class="nav-item"><a href="{% url 'informes' %}" class="nav-link text-uppercase font-weight-bold">Dashboard</a></li>
+                        </li>
+                        {% endif %}
+                        
+                        {% if perms.1Web.view_producto %}
+                        <li class="nav-item"><a href="{% url 'bodega' %}" class="nav-link text-uppercase font-weight-bold">Bodega</a></li>
+                        {% endif %}
+
+
+                          </li>
+                        <li class="nav-item"><a href="{% url 'carro' %}"><button class="btn btn-warning"><i class="fas fa-shopping-cart mr-1"></i>Carro ({{itemsCarro}})</button></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

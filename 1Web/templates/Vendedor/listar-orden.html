@@ -1,0 +1,152 @@
+{% load static %} {% block content %}
+{% include "admin/dashboard.html" %}
+<head>
+    <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+</head>
+
+<script type="text/javascript">
+    function aprobarOrden() {
+        Swal.fire({
+            "title": "¿Estas seguro?",
+            "text": "Esta accion es irreversible",
+            "icon": "warning",
+            "showCancelButton":true,
+            "showCloseButton":true,
+            "cancelButtonText": "No, cancelar",
+            "confirmButtonText": "Si, Aceptar",
+            "confirmButtonColor": "#32965D"
+        })
+        .then(function(result) {
+            if(result.isConfirmed){
+                Swal.fire(
+                    'Aceptado:',
+                    'La orden seleccionada ha sido aprobada.',
+                    'success'
+                )
+            }
+            
+        })
+    }
+
+</script>
+
+
+<script type="text/javascript">
+    function rechazarOrden() {
+        Swal.fire({
+            "title": "¿Estas seguro?",
+            "text": "Esta accion es irreversible",
+            "icon": "warning",
+            "showCancelButton":true,
+            "showCloseButton":true,
+            "cancelButtonText": "No, cancelar",
+            "confirmButtonText": "Si, Rechazar",
+            "confirmButtonColor": "#D81159"
+        })
+        .then(function(result) {
+            if(result.isConfirmed){
+                Swal.fire(
+                    'Rechazada:',
+                    'La orden seleccionada ha sido rechazada.',
+                    'error'
+                )
+            }
+            
+        })
+    }
+
+</script>
+
+
+<body>
+    <div id="contenido" class="content-wrapper">
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Listado de Ordenes</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th>IdProducto</th>
+                                        <th>Ordenid</th>
+                                        <th>Dia Orden</th>
+                                        <th>Entregado</th>
+                                        <th>transaccion_id</th>
+                                        <th>Usuario</th>
+                                        <th>Cantidad</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for o in response %}
+                                    <tr>
+                                        <td>{{ o.producto | title }}</td>
+                                        <td>{{ o.orden.id | title }}</td>
+                                        <td>{{ o.orden.dia_orden | title }}</td>
+                                        <td>{{ o.orden.entregado | title }}</td>
+                                        <td>{{ o.orden.transaccion_id | title }}</td>
+                                        <td>{{ o.orden.usuario}}</td>
+                                        <td>{{ o.cantidad }}</td>
+                                        <td> 
+                                            {% if perms.app.change_orden_item %}
+                                            <a href="#" onclick="aprobarOrden()"  class="btn btn-info btn-sm">Aprobar</a>
+                                            {% endif %}
+                                            {% if perms.app.delete_orden_item %}
+                                            <a href="#" onclick="rechazarOrden()" class="btn btn-danger btn-sm ml-5">Rechazar</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+
+
+<!--Scripts para el datatable-->
+
+
+<!-- jQuery -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables -->
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<!-- AdminLTE App -->
+
+
+<script>
+  $(function () {
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+      "responsive": true,
+    });
+  });
+</script>
+
+
+</body>
+
+
+{% endblock %}

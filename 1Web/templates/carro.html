@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<main class="page">
+  <section class="shopping-cart dark">
+    <div class="container">
+      <div class="block-heading">
+        <h2>Carro de Compras</h2>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12 col-lg-8">
+            <div class="items">
+              <div class="product">
+                {% for item in items %}
+                <div class="row">
+                  <div class="col-md-3">
+                    <img
+                      class="img-fluid mx-auto d-block image"
+                      src="{{item.producto.imagen.url}}"
+                    />
+                  </div>
+                  <div class="col-md-8">
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-md-5 product-name">
+                          <div class="product-name text-center">
+                            <a href="#">{{item.producto.marca}}</a>
+                          </div>
+                        </div>
+                        <div class="col-md-4 quantity">
+                        <p>Cantidad</p>
+                          <label for="quantity" class="font-weight-bold">{{item.cantidad}}</label>
+                          
+                          <button data-producto="{{item.producto.id}}" data-action="add" class="btn btn-outline-dark btn-sm mb-1 ml-1 update-cart"><i class="fas fa-arrow-up"></i></button>
+                          <button data-producto="{{item.producto.id}}" data-action="eliminar" class="btn btn-outline-dark btn-sm ml-4 update-cart"><i class="fas fa-arrow-down"></i></button>
+                        </div>
+                        {% load humanize %}
+                        <div class="col-md-3 mb-2 price">
+                          <p>Precio</p>
+                          <span>${{item.producto.precio | intcomma}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-4">
+            <div class="summary">
+              {% for item in items %}
+              <div class="summary-item"><span class="text">Total: {{item.producto.marca}}</span><span class="price">${{item.getTotal | intcomma}}</span></div>
+              {% endfor %}
+              <div class="summary-item"><span class="text">Productos: {{orden.get_items_total}}</span><span class="price">${{orden.get_cart_total | intcomma}}</span></div>
+              <a href="{% url 'create' %}">
+                <button id="webpay-pay" type="button" class="btn btn-outline-dark btn-lg">
+                    PAGAR CON WEBPAY
+                  </button>
+              </a>
+              <a href="{% url 'catalogoCuerdas' %}">
+                <button type="button" class="btn btn-outline-dark btn-lg">
+                    Continuar Comprando
+                  </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="text/javascript">
+
+function submitorderdata(){
+  const url = '/commit/'
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json',
+      'X-CSRFToken': csrftoken,
+    }
+  })
+  .then((response) => response.json())
+  .then((data) =>{
+    console.log('Success', data)
+    alert('Transaccion Completada')
+    window.location.href = "{% url 'home' %}"
+  })
+}
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+.header h1, p {
+    color: black;
+}
+
+.jumbotron{
+    background: url(https://i.imgur.com/NQBEVXp.jpg);
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Roboto Mono', monospace;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    background-color: #F5F5F5;
+    
+}
+
+#pro{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 25%;
+    margin-bottom: 5%;
+}
+
+
+
+
+#transbank{
+  left: 10%;
+}

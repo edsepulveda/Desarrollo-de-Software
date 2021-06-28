@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MUSIC PRO | Dashboard</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome  "{% static 'css/carro.css' %}"-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="shortcut icon" href="{% static 'images/music.ico' %}" type="image/x-icon">
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse">
+<!-- Site wrapper -->
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'informes' %}" role="button">Volver</a>
+          </li>
+        </ul>
+      </nav>
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="{% url 'informes' %}" class="brand-link">
+      <img  src="{% static 'images/music.jpg' %}"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">MUSIC PRO</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'images/music.jpg' %}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{request.user}}</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Links Rapidos
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Home</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'contacto' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Contacto</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'bodega' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bodega</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {% if request.user.is_staff %}
+          <li class="nav-header">ADMINISTRADOR</li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users-cog"></i>
+              <p>
+                Opciones Admin
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'agregar_producto' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar Producto</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'listar_producto' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar Productos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'informes' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
+          <li class="nav-header">VENDEDOR</li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Opciones Vendedor
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'ordenes' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listar Ordenes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-header">OPCIONES</li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                Opciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            {% if user.is_authenticated %}
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cerrar Sesion</p>
+                </a>
+              </li>
+            </ul>
+            {% endif %}
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- AdminLTE App -->
+<script src="{% static 'js/adminlte.min.js' %}"></script>
+</body>
+</html>

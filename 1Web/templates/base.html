@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MUSIC PRO</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/nav-bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carro.css' %}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/music.ico' %}" type="image/x-icon">
+    <script  type="text/javascript">
+      let user = '{{request.user}}'
+    function getToken(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+      }
+    }
+    return cookieValue;
+}
+const csrftoken = getToken('csrftoken');
+
+
+
+function getCookie(name) {
+  let cookieArr = document.cookie.split(';');
+
+  for (let i = 0; i < cookieArr.length; i++){
+    let cookiePair = cookieArr[i].split('=');
+
+    if(name == cookiePair[0].trim()){
+      return decodeURIComponent(cookiePair[1]);
+    }
+  }
+  return null
+}
+let carro = JSON.parse(getCookie('carro'))
+if (carro == undefined) {
+  carro = {}
+  console.log('Carrito fue creado')
+  //Lo que realiza esta linea es que el carrito se mantenga en cualquier pagina que nosotros estemos.
+  document.cookie = 'carro=' + JSON.stringify(carro) + ";domain=;path=/"
+  
+}
+console.log('Carro', carro)
+    </script>
+
+
+
+
+    <style>
+        .jumbotron{
+            background: url(https://i.imgur.com/NQBEVXp.jpg);
+        }
+    </style>
+</head>
+<body>
+
+    {% block navbar %}
+    {% include "resources/navbar.html" %}
+    {% endblock %}
+    
+    
+    
+    {% block content %}
+    {% endblock %}
+
+
+
+    {% block footer %}
+    {% include "resources/footer.html" %}
+    {% endblock %}
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+<script src="{% static 'js/ip.js' %}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+{% if messages %}
+  {% for m in messages %}
+    <script>
+      Swal.fire({
+        "title:": "Enviado!",
+        "text": "{{m}}",
+        "icon": "success"
+      })
+    </script>
+    {% endfor %}
+{% endif %}
+
+</html>
+
