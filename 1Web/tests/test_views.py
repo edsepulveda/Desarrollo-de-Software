@@ -117,7 +117,7 @@ class TestsUrls(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_dashboard_url(self):
-        response = self.c.get('/dashboard/informe/')
+        response = self.c.get('/informe/')
         #Si no eres admin, al momento de querer ingresar a la pagina, esta te rediccionara
         #Por eso el status code es de 302 que significa que la pagina redirecciono, dado que al hacer testeos
         #Este no se encuentra en el modo SuperUser

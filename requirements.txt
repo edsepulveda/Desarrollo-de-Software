@@ -6,3 +6,4 @@ django-admin-interface
 django-filters
 coverage
 django-silk==0.5.2
+
