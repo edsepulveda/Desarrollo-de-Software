@@ -4,21 +4,24 @@
 
 # Realizar 
 1) En terminal con ubicacion en folder:
- 
+ 	```
 	python manage.py createsuperuser
-	nombre: admin   pass: adminadmin
+	```
+	nombre: **Inserte nombre aqui**   pass: **Inserte Password aqui**
 
 
 2) En terminal con ubicacion en folder:
-	```py
+	```
 	pip install -r requirements.txt
 	```
 
 
 3) En terminal con ubicacion en folder:
-
+	```
 	python manage.py makemigrations
+	
 	python manage.py migrate
+	```
 
 
 4) En http://localhost:8000/admin/
