@@ -10,8 +10,9 @@
 
 
 2) En terminal con ubicacion en folder:
-
+	```py
 	pip install -r requirements.txt
+	```
 
 
 3) En terminal con ubicacion en folder:
